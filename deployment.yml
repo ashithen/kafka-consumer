@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-consumer
+spec:
+  replicas: 1  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: kafka-consumer
+  template:
+    metadata:
+      labels:
+        app: kafka-consumer
+    spec:
+      containers:
+      - name: kafka-consumer   
+
+        image: your-image-name:your-tag  # Replace with your Docker image
+        env:
+        - name: KAFKA_BROKERS
+          value: "http://34.56.44.98:9092"
+        - name: APP_PORT
+          value: "8083"
+        - name: CONSUMER_TOPIC
+          value: "my-topic"
+        - name: GROUP_ID
+          value: "my-group"
+        ports:
+        - containerPort: 8083
