@@ -10,14 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class KafkaController {
 
-    @Value("${spring.kafka.producer.topics}")
-    private String topic;
-
     @Autowired
     private KafkaMessageProducer kafkaMessageProducer;
 
     @GetMapping("/send")
-    public ResponseEntity<String> sendMessage(@RequestParam("count") int count) {
+    public ResponseEntity<String> sendMessage(@RequestParam("topic") String topic,
+                                              @RequestParam("count") int count) {
         for (int i=0; i<count; i++) {
             kafkaMessageProducer.sendMessage(topic, "Test Message");
         }
