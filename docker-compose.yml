@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  kafka-consumer:
+    build: .
+    environment:
+      KAFKA_BROKERS: "http://34.56.44.98:9092" # List of Kafka brokers
+      APP_PORT: "8083"
+      CONSUMER_TOPIC: "my-topic"
+      PRODUCER_TOPIC: "your-topic"
+      GROUP_ID: "my-group"
+    ports:
+      - "8083:8083"
